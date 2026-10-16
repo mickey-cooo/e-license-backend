@@ -7,25 +7,6 @@ export enum CommonStatus {
   DELETED = 'deleted',
 }
 
-export enum BookingStatus {
-  ACTIVE = 'active',
-  PENDING = 'pending',
-  ARCHIVED = 'archived',
-  CANCELLED = 'cancelled',
-  COMPLETED = 'completed',
-  DRAFT = 'draft',
-  PUBLISHED = 'published',
-  REJECTED = 'rejected',
-  APPROVED = 'approved',
-}
-
-export enum MerchantType {
-  MERCHANT = 'merchant',
-  STORE = 'store',
-  WAREHOUSE = 'warehouse',
-  OTHER = 'other',
-}
-
 export enum ELicenseMerchantType {
   FOOD_AND_BEVERAGE = 'food_and_beverage',
   HOTEL_AND_ACCOMMODATION = 'hotel_and_accommodation',
