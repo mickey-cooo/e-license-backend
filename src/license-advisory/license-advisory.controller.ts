@@ -1,7 +1,9 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Public } from '../decorator/roles.decorator';
 import { LicenseAdvisoryService } from './license-advisory.service';
 import { AnalyzeLicenseRequestDTO } from './dto/analyze-license.dto';
 
+@Public()
 @Controller('license-advisory')
 export class LicenseAdvisoryController {
   constructor(
