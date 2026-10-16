@@ -1,27 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import {
-  IsEnum,
-  IsNumber,
-  IsOptional,
-  IsString,
-  Max,
-  Min,
-} from 'class-validator';
+import { IsEnum, IsInt, IsOptional, IsString, Max, Min } from 'class-validator';
 import { CommonStatus, ELicenseMerchantType } from '../../enum/common.status';
 
 export class QueryMerchantDTO {
   @ApiProperty({ required: false, default: 0 })
   @IsOptional()
-  @IsNumber()
+  @IsInt()
   @Min(0)
-  @Max(100)
   @Type(() => Number)
   offset = 0;
 
   @ApiProperty({ required: false, default: 10 })
   @IsOptional()
-  @IsNumber()
+  @IsInt()
   @Min(1)
   @Max(100)
   @Type(() => Number)

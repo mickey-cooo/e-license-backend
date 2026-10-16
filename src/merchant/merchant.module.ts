@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MerchantEntity } from '../database/merchant.entity';
+import { LicenseAdvisoryModule } from '../license-advisory/license-advisory.module';
 import { MerchantController } from './merchant.controller';
 import { MerchantService } from './merchant.service';
-import { LicenseAdvisoryModule } from '../license-advisory/license-advisory.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([MerchantEntity]), LicenseAdvisoryModule],

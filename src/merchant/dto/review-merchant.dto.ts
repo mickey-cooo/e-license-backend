@@ -1,11 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsIn, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { CommonStatus } from '../../enum/common.status';
 
 export class ReviewMerchantBodyDTO {
   @ApiProperty({ enum: [CommonStatus.APPROVED, CommonStatus.REJECTED] })
   @IsNotEmpty()
-  @IsEnum(CommonStatus)
+  @IsIn([CommonStatus.APPROVED, CommonStatus.REJECTED])
   status: CommonStatus.APPROVED | CommonStatus.REJECTED;
 
   @ApiProperty({ required: false })
