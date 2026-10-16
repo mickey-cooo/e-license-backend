@@ -28,15 +28,18 @@ export const merchantTypeProfiles: Record<
   },
   [ELicenseMerchantType.HOTEL_AND_ACCOMMODATION]: {
     label: 'Hotel and Accommodation',
-    description: 'Hotels, hostels, serviced apartments, and short-stay operations.',
+    description:
+      'Hotels, hostels, serviced apartments, and short-stay operations.',
   },
   [ELicenseMerchantType.TOURISM_AND_TRAVEL]: {
     label: 'Tourism and Travel',
-    description: 'Tour operators, travel agencies, guides, and tourism services.',
+    description:
+      'Tour operators, travel agencies, guides, and tourism services.',
   },
   [ELicenseMerchantType.HEALTH_AND_WELLNESS]: {
     label: 'Health and Wellness',
-    description: 'Clinics, spas, wellness centers, beauty services, and care services.',
+    description:
+      'Clinics, spas, wellness centers, beauty services, and care services.',
   },
   [ELicenseMerchantType.EDUCATION_AND_TRAINING]: {
     label: 'Education and Training',
@@ -44,11 +47,13 @@ export const merchantTypeProfiles: Record<
   },
   [ELicenseMerchantType.MANUFACTURING]: {
     label: 'Manufacturing',
-    description: 'Factories and production lines, including packaged consumer goods.',
+    description:
+      'Factories and production lines, including packaged consumer goods.',
   },
   [ELicenseMerchantType.IMPORT_EXPORT]: {
     label: 'Import and Export',
-    description: 'Cross-border product trading, customs related, and bonded services.',
+    description:
+      'Cross-border product trading, customs related, and bonded services.',
   },
   [ELicenseMerchantType.TRANSPORT_AND_LOGISTICS]: {
     label: 'Transport and Logistics',
@@ -56,7 +61,8 @@ export const merchantTypeProfiles: Record<
   },
   [ELicenseMerchantType.CONSTRUCTION]: {
     label: 'Construction',
-    description: 'Construction contractors, engineering works, and project management.',
+    description:
+      'Construction contractors, engineering works, and project management.',
   },
   [ELicenseMerchantType.RETAIL_AND_ECOMMERCE]: {
     label: 'Retail and E-commerce',
@@ -64,11 +70,13 @@ export const merchantTypeProfiles: Record<
   },
   [ELicenseMerchantType.ENVIRONMENTAL_SERVICE]: {
     label: 'Environmental Service',
-    description: 'Waste handling, recycling, treatment, and environmental operations.',
+    description:
+      'Waste handling, recycling, treatment, and environmental operations.',
   },
   [ELicenseMerchantType.DIGITAL_SERVICE]: {
     label: 'Digital Service',
-    description: 'SaaS, digital platforms, software providers, and online service businesses.',
+    description:
+      'SaaS, digital platforms, software providers, and online service businesses.',
   },
   [ELicenseMerchantType.OTHER]: {
     label: 'Other',
@@ -162,7 +170,8 @@ export const licenseRules: LicenseRule[] = [
     code: 'LIC-CON-001',
     name: 'Construction Contractor License',
     authority: 'Council of Engineers / Relevant Authority',
-    reason: 'Required for construction and engineering contract-based activities.',
+    reason:
+      'Required for construction and engineering contract-based activities.',
     merchantTypes: [ELicenseMerchantType.CONSTRUCTION],
     activityKeywords: ['construction', 'contractor', 'engineering'],
     requiresHazardous: false,
