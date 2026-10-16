@@ -1,10 +1,12 @@
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
 import { TemplateEntity } from './template.entity';
-import { ResetPasswordStatus } from 'src/enum/reset.password.status';
+import { ResetPasswordStatus } from '../enum/reset.password.status';
 import { UserEntity } from './user.entity';
 
 @Entity('reset_password')
 export class ResetPasswordEntity extends TemplateEntity {
+  // sha256 of the emailed token, never the token itself
+  @Index()
   @Column({ type: 'varchar' })
   resetToken: string;
 

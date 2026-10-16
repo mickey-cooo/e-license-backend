@@ -1,10 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDefined, IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { lowerCaseEmail } from './register-request.dto';
 
 export class SignInRequestDTO {
   @ApiProperty()
+  @Transform(lowerCaseEmail)
   @IsEmail()
-  @IsNotEmpty()
   email: string;
 
   @ApiProperty()

@@ -1,23 +1,20 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsNotEmpty, IsNumber, IsOptional, Max, Min } from 'class-validator';
+import { IsInt, IsOptional, Max, Min } from 'class-validator';
 
 export class QueryUserDTO {
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsNumber()
-  @Min(0)
-  @Max(100)
+  @ApiPropertyOptional({ default: 0 })
   @IsOptional()
+  @IsInt()
+  @Min(0)
   @Type(() => Number)
-  offset: number;
+  offset = 0;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsNumber()
+  @ApiPropertyOptional({ default: 10 })
+  @IsOptional()
+  @IsInt()
   @Min(1)
   @Max(100)
-  @IsOptional()
   @Type(() => Number)
-  limit: number;
+  limit = 10;
 }

@@ -1,15 +1,27 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { Transform } from 'class-transformer';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
+
+export const lowerCaseEmail = ({ value }: { value: unknown }) =>
+  typeof value === 'string' ? value.trim().toLowerCase() : value;
 
 export class RegisterRequestDTO {
   @ApiProperty()
+  @Transform(lowerCaseEmail)
   @IsEmail()
-  @IsNotEmpty()
   email: string;
 
-  @ApiProperty()
+  // bcrypt only uses the first 72 bytes
+  @ApiProperty({ minLength: 8 })
   @IsString()
-  @IsNotEmpty()
+  @MinLength(8)
+  @MaxLength(72)
   password: string;
 
   @ApiProperty()
@@ -18,9 +30,9 @@ export class RegisterRequestDTO {
   confirmPassword: string;
 }
 
-export class RegisterByEmailDTO {
+export class ForgotPasswordDTO {
   @ApiProperty()
+  @Transform(lowerCaseEmail)
   @IsEmail()
-  @IsNotEmpty()
   email: string;
 }

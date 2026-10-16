@@ -1,85 +1,34 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   IsNotEmpty,
   IsOptional,
   IsPhoneNumber,
-  IsString,
-  Max,
   ValidateNested,
 } from 'class-validator';
-import { Type } from 'class-transformer';
-
-export class NameDTO {
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  th: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  en: string;
-}
-
-export class LastNameDTO {
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  th: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  en: string;
-}
-
-export class AddressDTO {
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  province: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  district: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  subDistrict: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  postalCode: string;
-
-  @ApiProperty()
-  @IsOptional()
-  @IsString()
-  detail: string;
-}
+import { AddressDTO, LastNameDTO, NameDTO } from './create-user.dto';
 
 export class UpdateUserBodyDTO {
-  @ApiProperty()
+  @ApiProperty({ type: NameDTO })
   @IsNotEmpty()
-  @IsString()
+  @ValidateNested()
+  @Type(() => NameDTO)
   name: NameDTO;
 
-  @ApiProperty()
+  @ApiProperty({ type: LastNameDTO })
   @IsNotEmpty()
-  @IsString()
+  @ValidateNested()
+  @Type(() => LastNameDTO)
   lastName: LastNameDTO;
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsString()
-  @Max(10)
+  @IsPhoneNumber('TH')
   phoneNumber: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiPropertyOptional({ type: AddressDTO })
+  @IsOptional()
   @ValidateNested()
   @Type(() => AddressDTO)
-  addressDetail: AddressDTO;
+  addressDetail?: AddressDTO;
 }

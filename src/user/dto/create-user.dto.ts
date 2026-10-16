@@ -4,7 +4,6 @@ import {
   IsOptional,
   IsPhoneNumber,
   IsString,
-  Max,
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
@@ -61,23 +60,24 @@ export class AddressDTO {
 }
 
 export class CreateUserBodyDTO {
-  @ApiProperty()
+  @ApiProperty({ type: NameDTO })
   @IsNotEmpty()
-  @IsString()
+  @ValidateNested()
+  @Type(() => NameDTO)
   name: NameDTO;
 
-  @ApiProperty()
+  @ApiProperty({ type: LastNameDTO })
   @IsNotEmpty()
-  @IsString()
+  @ValidateNested()
+  @Type(() => LastNameDTO)
   lastName: LastNameDTO;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsPhoneNumber('TH')
-  @Max(10)
   phoneNumber: string;
 
-  @ApiProperty()
+  @ApiProperty({ type: AddressDTO })
   @IsNotEmpty()
   @ValidateNested()
   @Type(() => AddressDTO)

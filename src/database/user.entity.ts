@@ -1,12 +1,24 @@
-import { Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
+} from 'typeorm';
 import { TemplateEntity } from './template.entity';
 import { CommonStatus } from '../enum/common.status';
 import { AddressEntity } from './address.entity';
-import { RoleEntity } from './role.entity';
+import { RoleType } from '../enum/role.status';
 import { ResetPasswordEntity } from './reset-password.entity';
 import { MerchantEntity } from './merchant.entity';
 
 @Entity('user')
+// emails are lower-cased in the service; deleted users free their email
+@Index('UQ_user_email_active', ['email'], {
+  unique: true,
+  where: `"status" <> 'deleted'`,
+})
 export class UserEntity extends TemplateEntity {
   @Column({ type: 'jsonb', nullable: true })
   name: {
@@ -36,12 +48,11 @@ export class UserEntity extends TemplateEntity {
   @JoinColumn({ name: 'address_uuid' })
   addressDetail: AddressEntity;
 
-  @OneToMany(() => RoleEntity, (role) => role.user_uuid)
-  role_uuid: RoleEntity[];
+  @Column({ type: 'enum', enum: RoleType, default: RoleType.USER })
+  role: RoleType;
 
   @OneToMany(() => ResetPasswordEntity, (resetpassword) => resetpassword.user)
-  @JoinColumn({ name: 'user_uuid' })
-  resetPassword: ResetPasswordEntity;
+  resetPassword: ResetPasswordEntity[];
 
   @OneToOne(() => MerchantEntity, (merchant) => merchant.user, {
     onDelete: 'CASCADE',
