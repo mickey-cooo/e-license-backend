@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { TemplateEntity } from './template.entity';
 import { DocumentWorkflowStatus } from '../enum/document-workflow.status';
 import { DocumentProgressEntity } from './document-progress.entity';
@@ -18,7 +18,7 @@ export class DocumentRequestEntity extends TemplateEntity {
   @Column({ type: 'text', nullable: true })
   description?: string;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: 'uuid', nullable: true })
   merchantUuid?: string;
 
   @ManyToOne(() => MerchantEntity, (merchant) => merchant.documents, {
@@ -44,13 +44,9 @@ export class DocumentRequestEntity extends TemplateEntity {
   })
   status: DocumentWorkflowStatus;
 
-  @OneToOne(
+  @OneToMany(
     () => DocumentProgressEntity,
     (progress) => progress.documentRequest,
-    {
-      cascade: true,
-    },
   )
-  @JoinColumn({ name: 'document_progress_uuid' })
-  progressLog: DocumentProgressEntity;
+  progressLog: DocumentProgressEntity[];
 }

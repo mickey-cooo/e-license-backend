@@ -11,9 +11,4 @@ export class UpdateDocumentStatusBodyDTO {
   @IsOptional()
   @IsString()
   note?: string;
-
-  @ApiPropertyOptional({ default: 'admin' })
-  @IsOptional()
-  @IsString()
-  updatedBy?: string;
 }

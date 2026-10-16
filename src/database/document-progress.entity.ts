@@ -1,17 +1,17 @@
-import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { TemplateEntity } from './template.entity';
 import { DocumentWorkflowStatus } from '../enum/document-workflow.status';
 import { DocumentRequestEntity } from './document-request.entity';
 
 @Entity('document_progress')
 export class DocumentProgressEntity extends TemplateEntity {
-  @OneToOne(() => DocumentRequestEntity, (request) => request.progressLog, {
+  @ManyToOne(() => DocumentRequestEntity, (request) => request.progressLog, {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'document_request_uuid' })
   documentRequest: DocumentRequestEntity;
 
-  @Column({ type: 'uuid', unique: true })
+  @Column({ type: 'uuid', name: 'document_request_uuid' })
   documentRequestUuid: string;
 
   @Column({ type: 'enum', enum: DocumentWorkflowStatus })

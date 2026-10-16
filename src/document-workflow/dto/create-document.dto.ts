@@ -1,5 +1,12 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUrl,
+  IsUUID,
+  MaxLength,
+} from 'class-validator';
 
 export class CreateDocumentBodyDTO {
   @ApiProperty()
@@ -16,7 +23,8 @@ export class CreateDocumentBodyDTO {
     description: 'Document location URL such as S3/drive URL.',
   })
   @IsNotEmpty()
-  @IsString()
+  @IsUrl({ protocols: ['https'], require_protocol: true })
+  @MaxLength(2048)
   fileUrl: string;
 
   @ApiPropertyOptional()
@@ -28,9 +36,4 @@ export class CreateDocumentBodyDTO {
   @IsOptional()
   @IsUUID()
   merchantUuid?: string;
-
-  @ApiPropertyOptional({ default: 'merchant-system' })
-  @IsOptional()
-  @IsString()
-  submittedBy?: string;
 }
