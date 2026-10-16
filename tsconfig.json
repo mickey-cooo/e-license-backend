@@ -13,10 +13,12 @@
     "target": "ES2023",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
+    // TS 6 turns strict on by default; keep the behaviour the code was written for
+    "strict": false,
     "strictNullChecks": true,
+    "types": ["node", "jest"],
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
