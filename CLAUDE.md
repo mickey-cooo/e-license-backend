@@ -17,11 +17,11 @@ Read a skill when the task needs it. Do not load all four up front. Where a skil
 
 ## Before a commit
 
-When the user asks to commit, do not commit yet. First:
+When the user asks to commit, do not commit yet. First run both skills on the changes that would be committed:
 
-1. Read `.claude/skills/code-reviewer/SKILL.md` and `.claude/skills/security-reviewer/SKILL.md` (and the `references/` files they point to).
-2. Review the changes that would be committed (`git diff`, staged and unstaged, plus new files) with both skills.
-3. Fix the findings that are clear bugs or security holes, and re-run `npx tsc --noEmit` and `npm test`. Report anything you did not fix, with the reason.
+1. Run the `code-reviewer` skill (`.claude/skills/code-reviewer`) and the `security-reviewer` skill (`.claude/skills/security-reviewer`). Use the `Skill` tool if they are listed there. Otherwise read each `SKILL.md` (and the `references/` files it points to) and carry out its workflow yourself. Do not only read them.
+2. Run them on everything that would be committed: `git diff`, staged and unstaged, plus new files. Both skills must finish, each with its own findings.
+3. Fix the findings that are clear bugs or security holes, then re-run `npx tsc --noEmit` and `npm test`. Report anything you did not fix, with the reason.
 4. Only then commit, using the commit format from the user's global instructions.
 
 If the user says to skip the review, skip it and say so in one line. A docs-only change (`*.md`, `plans/`) does not need it.
